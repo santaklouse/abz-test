@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\PositionsApiResource;
 use App\Models\Position;
 
-class PositionController extends Controller
+class PositionsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -21,4 +23,5 @@ class PositionController extends Controller
             );
         }
     }
+
 }

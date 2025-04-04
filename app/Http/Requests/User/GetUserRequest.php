@@ -10,15 +10,14 @@ use Illuminate\Validation\ValidationException;
 
 class GetUserRequest extends UserRequest
 {
-
     const DEFAULT_ERROR_MESSAGE = 'The user with the requested id does not exist.';
     const DEFAULT_ERROR_CODE = 400;
 
     public function all($keys = null)
     {
         $data = parent::all($keys);
-        if (Arr::get(request()->route()->parameters(), 'userId')) {
-            $data['userId'] = $this->route('userId');
+        if (Arr::get(request()->route()->parameters(), 'user')) {
+            $data['userId'] = $this->route('user');
         }
         return $data;
     }
@@ -51,7 +50,7 @@ class GetUserRequest extends UserRequest
     protected function passedValidation()
     {
         // check user with given id exists
-        if (!User::checkExistsById(request()->userId)) {
+        if (!User::checkExistsById(request()->user)) {
             $response = response()->json([
                 'success' => false,
                 'message' => 'User not found'

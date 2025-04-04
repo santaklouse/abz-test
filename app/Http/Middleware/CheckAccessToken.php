@@ -18,35 +18,30 @@ class CheckAccessToken
     {
         $token = $request->bearerToken();
 
-        Log::info('Processing token.', [
-            'token' => $token,
-        ]);
-
         if ($token === NULL) {
+            Log::warning('Token not found');
+
             return response()->json([
                 'success' => false,
                 'message' => 'Token not found'
             ], 403);
         }
+        Log::info('Processing token.', ['token' => $token]);
 
         $token = AccessToken::findToken($token);
         if ($token->isExpired() || $token->isUsed()) {
-            Log::info('Token was expired.', [
-                'token' => $token,
-            ]);
+            Log::warning('Token expired.', ['token' => $token]);
+
             return response()->json([
                 'success' => false,
                 'message' => 'Token expired.'
             ], 401);
         }
 
-        Log::info('Token valid.', [
-            'token' => $token,
-        ]);
+        Log::info('Token is OK.', ['token' => $token]);
 
         $token->makeUsed();
         return $next($request);
     }
-
 
 }
