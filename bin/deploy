@@ -10,7 +10,7 @@ fi
 
 # tasks to run before composer install (svn up/git pull)
 
-APP_DIR="${PWD}/app"
+APP_DIR="${PWD}/"
 
 cd "${APP_DIR}"
 

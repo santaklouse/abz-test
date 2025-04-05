@@ -4,10 +4,13 @@
 1. clone this repo
 2. `cd abz-test/`
 3. `./configure`
-6. `./sail up -d`
-7. `./sail npm i && ./sail npm run build`
-8. `./sail restart`
-9. open http://localhost:8080/ or https://localhost:443/ in browser
+4. `./sail up -d`
+5. `./sail artisan migrate:fresh --seed`
+6. `./sail pnpm install`
+7. `./sail pnpm run build`
+8. `./sail artisan  storage:link`
+10. `./sail restart`
+11. open http://localhost:8080/ or https://localhost:443/ in browser
 
 [//]: # (TODO: add dummy data for db in order to allow it deploy on PwD service)
 [//]: # (Try it on Play with Docker playground)
